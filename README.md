@@ -1,6 +1,6 @@
 # Python Simple Webserver
 
-Python Flask + Waitress MVC webserver that stores incoming requests in Postgres, with basic or token authentication.
+Python Flask + Gunicorn MVC webserver that stores incoming requests in Postgres, with basic or token authentication.
 
 It exposes 4 POSTs endpoints, all of them stores data:
 - /booking
@@ -21,6 +21,7 @@ It exposes 4 POSTs endpoints, all of them stores data:
 - Health endpoint.
 
 ## Next steps
+- Refine SQLAlchemy errors
 - Add tests
 - Add logging
 - Docker support
@@ -40,10 +41,6 @@ cd py-webserver
 
 4. Configure your `.env` file:
 ```env
-#Waitress settings
-WAITRESS_HOST=0.0.0.0
-WAITRESS_PORT=8080
-
 #Auth Type (basic or token)
 AUTH_METHOD=token
 
@@ -64,9 +61,9 @@ TABLE_NAME=data
 DB_URI=postgresql://${DB_USER}:${DB_PASS}@${DB_URL}:${DB_PORT}/${DB_NAME}
 ```
 
-5. Run with Waitress:
+5. Run with Gunicorn:
 ```bash
-uv run run.py
+gunicorn 'app:create_app() --bind 0.0.0.0:5050'
 ```
 
 6. Send a POST call
