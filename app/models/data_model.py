@@ -40,4 +40,4 @@ def save_request_data(method, endpoint, headers, body):
            conn.commit()
        return True, "Data saved successfully"
    except SQLAlchemyError as e:
-       return False, str(e)
+       return False, "Internal server error"

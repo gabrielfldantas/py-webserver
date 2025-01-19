@@ -8,4 +8,4 @@ def check_health():
             conn.execute(text('SELECT 1'))
         return True, "Database connection successful"
     except SQLAlchemyError as e:
-        return False, f"Database connection failed: {str(e)}"
+        return False, f"Database connection failed"
